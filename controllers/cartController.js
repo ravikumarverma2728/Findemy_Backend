@@ -5,7 +5,6 @@ const User = require("../models/userModel");
 
 const addCourseToCart = asyncHandler(async (req, res) => {
   try {
-    console.log(req.body);
 
     //checking if course is already exist in cart
     const { course_id, user_id } = req.body;
@@ -18,7 +17,7 @@ const addCourseToCart = asyncHandler(async (req, res) => {
         .json({ success: false, message: "Course already exist in cart!" });
     }
 
-    //adding course to cart
+   
     const cartCourse = new Cart({
       ...req.body,
     });
@@ -29,9 +28,7 @@ const addCourseToCart = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Get cart Course data of a user
-// @route GET /cart/user/:id
-// @access Private
+
 const getUserCartCourses = asyncHandler(async (req, res) => {
   try {
     //checking if user exist
@@ -56,15 +53,12 @@ const getUserCartCourses = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Delete cart course
-// @route DELETE /cart/:id
-// @access Private
+
 const deleteCartCourse = asyncHandler(async (req, res) => {
   try {
     const _id = req.params.id;
     const cartCourse = await Cart.findOneAndDelete({
       _id,
-      user_id: req.body.user_id,
     });
     if (!cartCourse) {
       return res

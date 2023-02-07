@@ -9,13 +9,13 @@ const login = async (req, res) => {
   const user = await Users.findOne({
     email,
   });
-  console.log("LOG1", user, password);
+  
 
   if (user && user._id) {
     // user was found
     // check the password
     const isValidPassword = bcrypt.compareSync(password, user.password);
-    console.log("LOG2", isValidPassword);
+    // console.log("LOG2", isValidPassword);
     if (isValidPassword) {
       // log him in
       const jwtSignaturePayload = {
@@ -52,8 +52,8 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.clearCookie("COOKIETOKEN");
-  res.send({ success: true });
+  // res.clearCookie("COOKIETOKEN");
+  // res.send({ success: true });
 };
 
 const signup = async (req, res) => {
@@ -66,7 +66,7 @@ const signup = async (req, res) => {
         message: "User already exists!",
       });
     } else {
-      console.log("PASSWORD_PLAIN", password);
+      // console.log("PASSWORD_PLAIN", password);
       const hashedPassword = bcrypt.hashSync(password, 10);
       const user = await Users.create({
         name,

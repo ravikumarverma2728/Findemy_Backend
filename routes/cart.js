@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {addCourseToCart,getUserCartCourses,deleteCartCourse} = require("../controllers/cartController");
-const { authorize } = require("../middlewareS/authMiddleware");
+const { authorize } = require("../middlewares/authMiddleware");
 
 router.post("/add", authorize, addCourseToCart);
 router.get("/user/:user_id",authorize,  getUserCartCourses);
